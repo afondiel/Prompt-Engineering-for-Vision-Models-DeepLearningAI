@@ -35,10 +35,10 @@ The course, led by `Andrew Ng` and instructors from [Comet](https://www.comet.co
 |--|--|
 |[Lesson0: Introduction](#)| -|
 |[Lesson1: Overview](#)|-|
-|[Lesson2: Image Segmentation](#)|[![Open notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](#)|
-|[Lesson3: Object Detection](#)|[![Open notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](#)|
-|[Lesson4: Image Generation](#)|[![Open notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](#)|
-|[Lesson5: Fine-tuning](#)|[![Open notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](#)|
+|[Lesson2: Image Segmentation](#)|[![Open notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/afondiel/Prompt-Engineering-for-Vision-Models-DeepLearningAI/blob/main/lab/notebooks/L2_Image_Segmentation.ipynb)|
+|[Lesson3: Object Detection](#)|[![Open notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/afondiel/Prompt-Engineering-for-Vision-Models-DeepLearningAI/blob/main/lab/notebooks/L3_Object_Detection.ipynb)|
+|[Lesson4: Image Generation](#)|[![Open notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/afondiel/Prompt-Engineering-for-Vision-Models-DeepLearningAI/blob/main/lab/notebooks/L4_Image_Generation.ipynb)|
+|[Lesson5: Fine-tuning](#)|[![Open notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/afondiel/Prompt-Engineering-for-Vision-Models-DeepLearningAI/blob/main/lab/notebooks/L5_Fine_Tuning.ipynb)|
 
 ## References
 
