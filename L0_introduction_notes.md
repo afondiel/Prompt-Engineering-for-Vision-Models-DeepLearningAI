@@ -117,9 +117,9 @@ Experiment tracking tools can help you compare these output images side by side 
 
 > Computer vision workflows are highly iterative, so it's valuable to track each of your experiment runs.
 
-I think you could be a real visionary when it comes to prompting.
-
 In the first lesson, you'll get an overview of visual prompting for image segmentation, object detection, and diffusion models that you'll use in this course.
+
+I think you could be a real visionary when it comes to prompting.
 
 ## References
 
