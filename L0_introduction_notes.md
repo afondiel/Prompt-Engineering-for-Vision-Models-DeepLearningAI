@@ -101,22 +101,9 @@ Let's say your object detection model is performing poorly all of a sudden, and 
 
 You open up a few incorrect predictions and realize that a new object has been introduced to your images that your model is mistaking for your target object.
 
-It's time to further train your model on this new object.
+> It's time to further train your model on this new object.
 
 It's unlikely that evaluation metrics alone would it be able to paint the full story of what was going on here.
-
-And so visualizing your output can be very important.
-
-Similarly, when iterating across different sets of hyperparameters,
-
-you'll sometimes need to see the output image in order to understand how the hyperparameter values are affecting it.
-
-Experiment tracking tools can help you compare these output
-images side by side and track and organize, which inputs lead to which outputs so you can reproduce them later on.
-
-Computer vision workflows are highly iterative, so it's valuable to track each of your experiment runs.
-
-Many people have worked to create this course.
 
 And so visualizing your output can be very important.
 
@@ -127,6 +114,8 @@ Experiment tracking tools can help you compare these output images side by side 
 > Computer vision workflows are highly iterative, so it's valuable to track each of your experiment runs.
 
 > I think you could be a real visionary when it comes to prompting.
+
+In the first lesson, you'll get an overview of visual prompting for image segmentation, object detection, and diffusion models that you'll use in this course.
 
 ## References
 
