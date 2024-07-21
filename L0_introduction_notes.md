@@ -1,6 +1,6 @@
 # Lesson0: Introduction
 
-**Key Takeaways:**
+**Overview**
 
 `Prompting` applies not just to **text** but also to **vision**, including some image segmentation, object detection and image generation models.
 
@@ -16,7 +16,9 @@ Using a combination of positive and negative prompts, helps you to isolate a reg
 
 You'll learn about many other tools, as well as best practices for prompting to:
 - Analyze status to understand images, as well as to generate or to otherwise manipulate or change images.
-  
+
+**Prompt creation, iteration**
+
 In the course, you'll also apply prompt engineering to image generation: 
 - For instance, you can provide the text prompt a dragon to the **stability diffusion** model to generate:
 
@@ -45,43 +47,45 @@ You'll obtain that outline or mask using image segmentation.
 Furthermore, you'll obtain the bounding box that SAM uses as input by prompting an **object detection model**, this time with a text prompt such:
 
 ```
-as cute dog with a pink jacket to generate a bounding box around that dog.
+as cute dog with a pink jacket 
 ```
 
-You will `iterate` on both `the prompts` and `the model hyperparameters` that you will tune in this inpainting pipeline.
+to generate a bounding box around that dog.
 
-> Diffusion models work by transforming a sample from a simple distribution like Gaussian noise, into a complex, learned distribution, like images. 
+**Diffusion Process**
+
+You will `iterate` on both `the prompts` and `the model hyperparameters` that you will `tune` in this inpainting pipeline.
+
+> Diffusion models work by transforming a sample from a simple distribution like `Gaussian noise`, into a complex, learned distribution, like images. 
 
 - The `guidance scale` hyperparameter determines 
-how heavily the text input should affect the target distribution during the `reverse diffusion process`. 
+how heavily the text input should affect the target distribution during the **reverse diffusion process**. 
 - A `lower guidance scale` will allow the model to sample freely from its learned distribution of images
-- A higher guidance scale will guide the model towards a sample that more closely matches the text input. 
+- A `higher guidance scale` will guide the model towards a sample that more closely matches the text input. 
 
-The number of inference steps hyperparameter, controls how gradually the model transforms the noisy distribution back into a clean sample.
+> The number of inference steps hyperparameter, controls how gradually the model transforms the noisy distribution back into a clean sample.
 
-More steps generally allows for a more detailed and accurate generation, as the model has more opportunities to refine the data.
+> More steps generally allows for a more detailed and accurate generation, as the model has more opportunities to refine the data.
 
-However, more steps also means more computation time.
-
-More step generally allows for a more detailed and accurate generation, as the model has more opportunities to refine the data.
-
-However, more steps also means more computation time.
+However, more steps also means `more computation time`.
 
 The strength, hyperparameter, and the context of stable diffusion, determines how noisy the initial distribution is. 
 
 During the inpainting process, where the added noise is used to erase portions of the initial image, strength essentially determines how much of the initial image is retained in the diffusion process.
 
-Furthermore, what if you wanted to personalize
-the diftusion model to generate not just a generic dragon, cat or person, but a specific dragon, your specific pet cat, or your best friend?
+**Fine-tuning**
 
-You'll use a fine tuning method called Dreambooth, developed by Google Research, to tune the stable diffusion model to associate a text label with a particular object, such as your good friend.
+> Furthermore, what if you wanted to personalize the diffusion model to generate not just a generic dragon, cat or person, but a specific dragon, your specific pet cat, or your best friend?
 
-And of course, youll use the dreamboot tuning process on the stable diffusion model to associate the word Andrew Ng with just six photographs of Andrew.
+You'll use a fine tuning method called [Dreambooth](https://huggingface.co/docs/diffusers/training/dreambooth), developed by Google Research, to tune the stable diffusion model to associate a text label with a particular object, such as your good friend.
 
-After fine tuning, you can prompt the model with texts
-such as a Van Gogh painting of Andrew, and the model can generate. the image.
+In this course, you'll use the dreamboot tuning process on the stable diffusion model to associate the word Andrew Ng with just six photographs of Andrew.
 
-One unique aspect of vision model development workflows
+After fine tuning, you can prompt the model with texts such as a Van Gogh painting of Andrew, and the model can generate. the image.
+
+**Evaluation**
+
+> One unique aspect of `vision model development workflows`
 is that evaluation metrics won't always be able to tel you the ful story.
 
 Oftentimes, you'll want to visualize your image outputs and inspect manually to understand where your model is
@@ -114,22 +118,13 @@ Computer vision workflows are highly iterative, so it's valuable to track each o
 
 Many people have worked to create this course.
 
-
 And so visualizing your output can be very important.
 
 Similarly, when iterating across different sets of hyperparameters, you'll sometimes need to see the output image in order to understand how the hyperparameter values are affecting it.
 
 Experiment tracking tools can help you compare these output images side by side and track and organize, which inputs lead to which outputs so you can reproduce them later on.
 
-Computer vision workflows are highly iterative, so it's valuable to track each of your experiment runs.
-
-Many people have worked to create this course.
-
-I'd like to thank on the Comet's side, Sid Mehta, senior growth engineer at Comet.
-
-From DeepLearning.AI Eddy Shyu also contributed to this course.
-
-In the first lesson, you'll get an overview of visual prompting for image segmentation, object detection, and diffusion models that you'll use in this course.
+> Computer vision workflows are highly iterative, so it's valuable to track each of your experiment runs.
 
 > I think you could be a real visionary when it comes to prompting.
 
@@ -145,4 +140,7 @@ Diffusion Models Resources:
 
 - HF Diffusion models tools: 
   - [Diffusion Course - HF learn](https://huggingface.co/learn/diffusion-course/unit0/1)
-  - [HF Diffusers - library & pipeline for SOTA pretrained diffusion models](https://huggingface.co/docs/diffusers/index) 
+  - [HF Diffusers - library & pipeline for SOTA pretrained diffusion models](https://huggingface.co/docs/diffusers/index)
+  - [Dreambooth HF](https://huggingface.co/docs/diffusers/training/dreambooth)
+
+
