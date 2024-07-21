@@ -86,7 +86,11 @@ After fine tuning, you can prompt the model with texts such as a Van Gogh painti
 **Evaluation**
 
 > One unique aspect of `vision model development workflows`
-is that evaluation metrics won't always be able to tel you the ful story.
+is that evaluation metrics won't always be able to tell you the ful story.
+
+![](https://blogs.nvidia.com/wp-content/uploads/2023/03/metropolis-diagram-sdk-workflow-2421701-842x424.png)
+
+(Source [Link](https://blogs.nvidia.com/blog/metropolis-ecosystem-growth-accelerates-vision-ai/))
 
 Oftentimes, you'll want to visualize your image outputs and inspect manually to understand where your model is
 getting things right and where it's getting things wrong.
@@ -113,7 +117,7 @@ Experiment tracking tools can help you compare these output images side by side 
 
 > Computer vision workflows are highly iterative, so it's valuable to track each of your experiment runs.
 
-> I think you could be a real visionary when it comes to prompting.
+I think you could be a real visionary when it comes to prompting.
 
 In the first lesson, you'll get an overview of visual prompting for image segmentation, object detection, and diffusion models that you'll use in this course.
 
