@@ -14,7 +14,7 @@ Let's take a look at a few different methods of visually prompting the Segment A
 
 > Image segmentation is a computer vision technique that partitions a digital image into discrete groups of pixels or image segments.
 
-<img width="800" height="400" src="./docs/screenshots/img_seg0.png">
+<img width="920" height="400" src="./docs/screenshots/img_seg0.png">
 
 `Image segmentation` is typically used to locate objects and boundaries in images, and is commonly used in object detection, 3D reconstruction, and image editing workflows.
 
@@ -50,7 +50,7 @@ They are then fed into the `masked decoder`, and SAM outputs the `top three vali
 
 Fast SAM is a `CNN-based` Segment Anything Model trained using only `2% of the original dataset (i.e: 220k images from 11 million images)` published by the SAM authors and achieves comparable performance on `32x32 images`, but at `50x higher the runtime speed`.
 
-<img width="800" height="400" src="./docs/screenshots/img_seg3.png">
+<img width="920" height="400" src="./docs/screenshots/img_seg3.png">
 
 > Prompting Fast SAM also differs slightly from prompting the original SAM, in that it automatically **detects all masks** in an image above a configurable confidence threshold, and then filters all the generated masks based on the prompts provided by the user.
 
