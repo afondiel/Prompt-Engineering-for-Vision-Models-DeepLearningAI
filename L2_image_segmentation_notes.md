@@ -12,40 +12,51 @@ Let's take a look at a few different methods of visually prompting the Segment A
 
 ## What is image segmentation?
 
-<img width="800" height="400" src="./docs/screenshots/img_seg0.png">
-
 > Image segmentation is a computer vision technique that partitions a digital image into discrete groups of pixels or image segments.
+
+<img width="800" height="400" src="./docs/screenshots/img_seg0.png">
 
 `Image segmentation` is typically used to locate objects and boundaries in images, and is commonly used in object detection, 3D reconstruction, and image editing workflows.
 
-`Image segmentation` is the process of assigning a label to every pixel in an image such that pixels with the same label share certain characteristics.
+`Image segmentation` is the proces
+s of assigning a label to every pixel in an image such that pixels with the same label share certain characteristics.
 
 <img width="800" height="400" src="./docs/screenshots/img_seg1.png">
 
-Let's take a look at a few different methods of visually prompting the Segment Anything Model (SAM)
-
-In this lesson, we'll look at the Segment Anything Model, a faster version of the Segment Anything Model, and then we'll try prompting that model with a set of pixel coordinates, multiple sets of coordinates, bounding boxes, and positive and negative prompts.
+Let's take a look at a few different methods of visually prompting the Segment Anything Model (SAM): 
+- the Segment Anything Model (SAM) 
+- faster version of the Segment Anything Model (FastSAM) 
+- prompting with a set of pixel coordinates
+- prompting with multiple sets of coordinates
+- prompting with bounding boxes
+- using a positive and negative prompts
 
 The original Segment Anything Model is a milestone in computer vision that has become a foundational step for many high-level downstream tasks like image segmentation, image captioning, and image editing. 
 
-<img width="800" height="400" src="./docs/screenshots/img_seg2.png">
+<img width="600" height="400" src="./docs/screenshots/img_seg2.png">
 
-But its high computational costs sometimes prevent it from wider applications in industry scenarios like those in edge devices.
+But its `high computational costs` sometimes prevent it from wider applications in industry scenarios like those in `edge devices`.
 
-SAM's computational costs mainly come from its transformer architecture.
+SAM's computational costs mainly come from its `transformer architecture`.
 
-As you can see in the image, SAM accepts either bounding box coordinates or single pixel coordinates, as well as an input image. 
+As you can see in the image, SAM accepts either: 
+- **bounding box coordinates**
+- **single pixel coordinates** 
+- **input image** 
 
-Each of these inputs is encoded by an image encoder and a prompt encoder, respectively. They are then fed into the masked decoder, and SAM outputs the top three valid masks for that point or bounding box.
+Each of these inputs is encoded by an `image encoder` and a `prompt encoder`, respectively.
 
-Fast SAM is a CNN-based Segment Anything Model trained using only 2% of the original dataset published by the SAM authors and achieves comparable performance on 32x32 images, but at 50 times higher the runtime speed.
+They are then fed into the `masked decoder`, and SAM outputs the `top three valid masks` for that point or bounding box.
+
+Fast SAM is a `CNN-based` Segment Anything Model trained using only `2% of the original dataset (i.e: 220k images from 11 million images)` published by the SAM authors and achieves comparable performance on `32x32 images`, but at `50x higher the runtime speed`.
 
 <img width="800" height="400" src="./docs/screenshots/img_seg3.png">
 
-Prompting Fast SAM also differs slightly from prompting the original SAM, in that it automatically detects all masks in an image above a configurable confidence threshold, and then filters all the generated masks based on the prompts provided by the user.
+> Prompting Fast SAM also differs slightly from prompting the original SAM, in that it automatically **detects all masks** in an image above a configurable confidence threshold, and then filters all the generated masks based on the prompts provided by the user.
+
+## Lab: script along with the notebook 👉 [![Open notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/afondiel/Prompt-Engineering-for-Vision-Models-DeepLearningAI/blob/main/lab/notebooks/L2_Image_Segmentation.ipynb)
 
 We've already installed the necessary package into this environment, but if you're following along in your own environment, you'll need to pip install a few packages here.
-
 
 First, we'll open the example image we'll be using throughout this lesson and take a peek at it. 
 
@@ -156,7 +167,16 @@ Let's go on to the next lesson.
 
 ## References
 
-- Main course: 
-  - https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/3/image-segmentation
+Main course: 
+- https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/3/image-segmentation
+
+Notes:
+
 - [MODULE 5: Semantic Segmentation from Visual Perception Lecture Self-Driving Cars Specialization U of T](https://github.com/afondiel/Self-Driving-Cars-Specialization/blob/a03c6afd130d6435d3d307dc2331aced4c90db89/Course3-Visual-Perception-for-Self-Driving-Cars/course3-w5-notes.md)
 - [Road Segmentation using Fully Convolutional Network (FCN) - @afondiel](https://github.com/afondiel/Self-Driving-Cars-Perception-and-Deep-Learning-Free-Course-freeCodeCamp/blob/main/01-Road-Segmentation-FCN.md)
+
+
+Paper:
+
+- [SAM](https://arxiv.org/pdf/2304.02643)
+- [FastSAM](https://arxiv.org/pdf/2306.12156)
