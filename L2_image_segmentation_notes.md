@@ -175,6 +175,8 @@ Notes:
 - [MODULE 5: Semantic Segmentation from Visual Perception Lecture Self-Driving Cars Specialization U of T](https://github.com/afondiel/Self-Driving-Cars-Specialization/blob/a03c6afd130d6435d3d307dc2331aced4c90db89/Course3-Visual-Perception-for-Self-Driving-Cars/course3-w5-notes.md)
 - [Road Segmentation using Fully Convolutional Network (FCN) - @afondiel](https://github.com/afondiel/Self-Driving-Cars-Perception-and-Deep-Learning-Free-Course-freeCodeCamp/blob/main/01-Road-Segmentation-FCN.md)
 
+Docs:
+- [Ultralytics YOLO Docs](https://docs.ultralytics.com/)
 
 Paper:
 
