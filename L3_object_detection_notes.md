@@ -1,12 +1,11 @@
-# Lesson2: Image Detection 
+# Lesson3: Object Detection 
 
 
 ## Overview
 
 <!-- <img width="920" height="400" src="./docs/screenshots/img_det0.png"> -->
 
-In this lesson, you'll use natural language to prompt a zero shot object detection model
-OwI-ViT, where, ViT stands for vision Transformer
+In this lesson, you'll use natural language to prompt a zero-shot object detection model OwI-ViT, where, ViT stands for vision Transformer
 
 You'll then use the output of this model as an input to SAM, which you used in the last lesson.
 
@@ -328,7 +327,9 @@ Let's go on to the next lesson.
 ## References
 
 - Main course: 
-  - https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/3/image-detection
+  - https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/4/object-detection
+
+
 
 
 
