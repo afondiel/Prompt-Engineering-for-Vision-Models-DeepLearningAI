@@ -48,6 +48,10 @@ Main Course :
 Others short Free Courses available on DeepLearning.AI : 
 - https://learn.deeplearning.ai/
 
+Resources:
+- [Awesome-Diffusion-Models: A collection of resources and papers on Diffusion Models](https://github.com/diff-usion/Awesome-Diffusion-Models)
+
+
 
 
 
