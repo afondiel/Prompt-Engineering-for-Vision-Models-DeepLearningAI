@@ -15,13 +15,13 @@ The course, led by `Andrew Ng` and instructors from [Comet](https://www.comet.co
 
 ## Course Contents
 
-- [Lesson0: Introduction](#)
-- [Lesson1: Overview](#)
-- [Lesson2: Image Segmentation](#)
-- [Lesson3: Object Detection](#)
-- [Lesson4: Image Generation](#)
-- [Lesson5: Fine-tuning](#)
-- [Lesson6: Conclusion](#)
+- [Lesson0: Introduction](./L0_introduction_notes.md)
+- [Lesson1: Overview](./L1_overview_notes.md)
+- [Lesson2: Image Segmentation](./L2_image_segmentation_notes.md)
+- [Lesson3: Object Detection](./L3_image_detection_notes.md)
+- [Lesson4: Image Generation](./L4_image_generation_notes.md)
+- [Lesson5: Fine-tuning](./L5_fine_tuning_notes.md)
+- [Lesson6: Conclusion](./L6_conclusion-notes.md)
 
 ## Setup & Requirements  
 
