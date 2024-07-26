@@ -1,41 +1,51 @@
 # Lesson3: Object Detection 
 
-
 ## Overview
 
-<!-- <img width="920" height="400" src="./docs/screenshots/img_det0.png"> -->
+<!-- <img width="920" height="400" src="./docs/screenshots/obj_det0.png"> -->
 
-In this lesson, you'll use natural language to prompt a zero-shot object detection model OwI-ViT, where, ViT stands for vision Transformer
+In this lesson, you'll use natural language to prompt a `zero-shot` object detection model [OwI-ViT](https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/4/object-detection), where, [ViT](https://huggingface.co/docs/transformers/model_doc/vit) stands for vision Transformer.
 
-You'll then use the output of this model as an input to SAM, which you used in the last lesson.
+You'll then use the output of this model as an input to SAM, which you used in the [last lesson](./L2_image_segmentation_notes.md).
 
-0:1Z You'll create an image editing pipeline by chaining these two vision models so that a user can give
-a natural language prompt and the pipeline outputs a segmentation mask
+You'll create an `image editing pipeline` by chaining these two vision models (Owl-ViT + SAM), so that a user can give a natural language prompt and the pipeline outputs a segmentation mask
 
-Let's get started
+## Course Plan
 
-In the last lesson, we saw how to create masks based on point prompts or bounding boxes
+Let's get started!
 
-In this lesson, we're going to see how we can use natural text to generate these masks instead
+In the last lesson, we saw how to create `masks` based on `point prompts` or `bounding boxes`.
 
-In order to do this, we're going to be using a pipeline of models which means simply that the first the output of the first model 
-will be fed into the second model
+In this lesson, we're going to see:
+- How we can use natural text to generate these masks instead
+- In order to do this, we're going to be using a `pipeline of models` which means simply that the first the output of the first model will be fed into the second model
 
-The first model in this pipeline will be a zero-shot object detection model which will then be followed by a SAM model that will take the generated bounding box from this zero-shot object detection model, to generate the masks model, to generate the masks
+**Image Editing Pipeline**
 
-The zero-shot object detection model we will be using is called OWL-ViT OWL-ViT model is a zero sharp object detection model, meaning 1125 it can detect objects within an image based on simple text prompts 
+```mermaid
+  graph LR;
+    A[Owl-ViT]-->B[SAM]
+```
+
+> The first model in this pipeline will be a zero-shot object detection model which will then be followed by a SAM model that will take the generated bounding box from this zero-shot object detection model, to generate the masks model, to generate the masks
+
+The zero-shot object detection model we will be using is called OWL-ViT.
+
+OWL-ViT model is a zero sharp object detection model, meaning, it can `detect objects` within an image based on simple `text prompts `
 
 The fact that it is a zero-shot model, means that you don't need to train it in any way for it to detect any object within an image
 
 The way we will be using OWL-ViT within this lesson, is by using a text prompt, i.e a string of text to generate a bounding box We will not be covering in detail how the OWL-ViT model works but we can cover some of the basics way in which it was trained. 
 
-The OWL-ViT model was trained in two parts one pre-training phase, and a second fine tuning phase
+> **The OWL-ViT model was trained in two parts**: 
+> 1. pre-training phase
+> 2. fine-tuning phase
 
 In the pre-training phase, the model learns to associate an image with a piece of text using a technique that leverages contrastive loss and this process allows the OWL-ViT model to develop a strong understanding of both an image and its corresponding text
 
 In order for this model to achieve good performance, it also required a fine tuning stage
 
-*During this stage, the model is trained specifically for object detection
+During this stage, the model is trained specifically for object detection
 
 While in the pre-training phase, the model was just learning how to associate a piece of text and an image during the fine tuning stage, the model learns to identify, object and associate them with a particular word or string
 
@@ -98,9 +108,9 @@ on the image.
 on the image We can then use the show boxes and labels on image function 
 to view the bounding boxes on top of the image of the two dogs
 
-As you can see here,Z:45 and generate two bounding boxes highlighting each dog on the image the OWL-ViT model has been able to take a text input dog 
+As you can see here, and generate two bounding boxes highlighting each dog on the image the OWL-ViT model has been able to take a text input dog 
 
-It was even able to overlap the bounding boxes of the two dogs,Z:55 You have now successfully identified the two dogs on the image based on a simple text prompt
+It was even able to overlap the bounding boxes of the two dogs,  You have now successfully identified the two dogs on the image based on a simple text prompt
 
 You can now move on to the next step of the pipeline, 
 
@@ -328,6 +338,12 @@ Let's go on to the next lesson.
 
 - Main course: 
   - https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/4/object-detection
+
+Docs: 
+
+- [OWL-ViT](https://huggingface.co/docs/transformers/model_doc/owlvit)
+
+
 
 
 
