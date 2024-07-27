@@ -35,7 +35,7 @@ In order to do this, we're going to be using a `pipeline of models` which means 
 
 The zero-shot object detection model we will be using is called `OWL-ViT`.
 
-<img width="920" height="400" src="./docs/screenshots/obj_det0.png">
+<img width="1024" height="400" src="./docs/screenshots/obj_det0.png">
 
 OWL-ViT model is a zero sharp object detection model, meaning, it can `detect objects` within an image based on simple `text prompts `
 
