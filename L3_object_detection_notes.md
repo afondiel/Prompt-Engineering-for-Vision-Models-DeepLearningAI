@@ -83,11 +83,11 @@ Instead of downloading the image directly from the internet we will be leveragin
 
 As you can see, we now have the same image as we used in the previous notebookLet's go ahead and load the OWL-ViT model from the Hugging Face hub
 
-In order to access the OWL-ViT model we will be using the Transformers library and specifically the pipeline method
+In order to access the OWL-ViT model we will be using the [Transformers](https://huggingface.co/docs/transformers/fr/index) library and specifically the [pipeline](https://huggingface.co/docs/transformers/main_classes/pipelines) method.
 
 There are many different versions of the OWL-ViT model available on Hugging Face
 
-For this particular lesson, you will be using the base model OWL-ViT base
+For this particular lesson, you will be using the base model: `OWL-ViT base`
 
 Now that the model has been loaded we can go ahead and use it to identify the dogs in the image 
 
@@ -123,6 +123,10 @@ You can now move on to the next step of the pipeline, which is to use these boun
 
 The approach we will be taking is very similar to the previous lesson
 
+### MobileSAM
+
+<img width="600" height="600" src="./docs/screenshots/obj_det1.png">
+
 However, instead of using the fast SAM model, you will be using the mobile SAM model
 
 As you will have seen in the previous lesson, the SAM model or segment anything model can be used to generate masks based on bounding boxes
@@ -137,7 +141,7 @@ In order to perform more efficiently the MobileSAM model uses a process known as
 
 > Model Distillation is a different technique compared to model `compression` techniques or `quantization`, in the sense that **it doesn't actually change the model format**, but trains an entirely new and much smaller model
 
-In this lesson, you will see that the MobilesAM model performs just as as well as the larger SAM model
+> In this lesson, you will see that the MobilesAM model performs just as as well as the larger SAM model
 
 You can now load the MobilesAM model using the Ultra Analytics library
 
@@ -325,12 +329,12 @@ Let's go on to the next lesson.
 Docs: 
 
 - [OWL-ViT - HF](https://huggingface.co/docs/transformers/model_doc/owlvit)
+- [HF Pipelines](https://huggingface.co/docs/transformers/main_classes/pipelines)
 
 Papers:
 - [Owl - ViT (Simple Open-Vocabulary Object Detection with Vision Transformers)](https://arxiv.org/pdf/2205.06230)
 - [MOBILE SAM](https://arxiv.org/pdf/2306.14289)
   - [MobileSAM Model](https://huggingface.co/dhkim2810/MobileSAM)
-- 
 
 
 
