@@ -2,38 +2,44 @@
 
 ## Overview
 
-<!-- <img width="920" height="400" src="./docs/screenshots/obj_det0.png"> -->
 
-In this lesson, you'll use natural language to prompt a `zero-shot` object detection model [OwI-ViT](https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/4/object-detection), where, [ViT](https://huggingface.co/docs/transformers/model_doc/vit) stands for vision Transformer.
+In this lesson, you'll use natural language to prompt a `zero-shot` object detection model [Owl-ViT](https://huggingface.co/docs/transformers/model_doc/owlvit), where, [ViT](https://huggingface.co/docs/transformers/model_doc/vit) stands for vision Transformer.
 
-You'll then use the output of this model as an input to SAM, which you used in the [last lesson](./L2_image_segmentation_notes.md).
+You'll then use the output of this model as an input to [SAM](https://segment-anything.com/), which you used in the [last lesson](./L2_image_segmentation_notes.md).
 
 You'll create an `image editing pipeline` by chaining these two vision models (Owl-ViT + SAM), so that a user can give a natural language prompt and the pipeline outputs a segmentation mask
 
-## Course Plan
-
-Let's get started!
+## Image Editing Pipeline
 
 In the last lesson, we saw how to create `masks` based on `point prompts` or `bounding boxes`.
 
-In this lesson, we're going to see:
-- How we can use natural text to generate these masks instead
-- In order to do this, we're going to be using a `pipeline of models` which means simply that the first the output of the first model will be fed into the second model
-
-**Image Editing Pipeline**
-
+In this lesson, we're going to see how we can use `natural text` to generate these `masks` instead
 ```mermaid
-  graph LR;
-    A[Owl-ViT]-->B[SAM]
+flowchart LR
+  subgraph Pipeline
+    direction LR
+    B(Owl-ViT)--Bounding Boxes-->C(SAM)
+  end 
+  
+  A>Text Prompt]-->B
+  Pipeline-->D>Seg Masks]
+
+  style B stroke:#f11,stroke-width:4px
+  style C stroke:#11f,stroke-width:4px
 ```
+
+
+In order to do this, we're going to be using a `pipeline of models` which means simply that the first the output of the first model will be fed into the second model
 
 > The first model in this pipeline will be a zero-shot object detection model which will then be followed by a SAM model that will take the generated bounding box from this zero-shot object detection model, to generate the masks model, to generate the masks
 
-The zero-shot object detection model we will be using is called OWL-ViT.
+The zero-shot object detection model we will be using is called `OWL-ViT`.
+
+<img width="920" height="400" src="./docs/screenshots/obj_det0.png">
 
 OWL-ViT model is a zero sharp object detection model, meaning, it can `detect objects` within an image based on simple `text prompts `
 
-The fact that it is a zero-shot model, means that you don't need to train it in any way for it to detect any object within an image
+> The fact that it is a zero-shot model, means that you don't need to train it in any way for it to detect any object within an image.
 
 The way we will be using OWL-ViT within this lesson, is by using a text prompt, i.e a string of text to generate a bounding box We will not be covering in detail how the OWL-ViT model works but we can cover some of the basics way in which it was trained. 
 
@@ -41,20 +47,27 @@ The way we will be using OWL-ViT within this lesson, is by using a text prompt, 
 > 1. pre-training phase
 > 2. fine-tuning phase
 
-In the pre-training phase, the model learns to associate an image with a piece of text using a technique that leverages contrastive loss and this process allows the OWL-ViT model to develop a strong understanding of both an image and its corresponding text
 
-In order for this model to achieve good performance, it also required a fine tuning stage
+**Pre-training phase**
 
-During this stage, the model is trained specifically for object detection
+- In the pre-training phase, the model learns to associate an image with a piece of text using a technique that leverages contrastive loss and this process allows the OWL-ViT model to develop a strong understanding of both an image and its corresponding text
+  
+**Fine-tuning phase**
 
-While in the pre-training phase, the model was just learning how to associate a piece of text and an image during the fine tuning stage, the model learns to identify, object and associate them with a particular word or string
+- In order for this model to achieve good performance, it also required a fine tuning stage
+- During this stage, the model is trained specifically for object detection
 
-Now that we have covered at a high level how the OWL-ViT model works let's jump into some code and see how we can use it in practice.2.06 
+While in the **pre-training phase**, the model was just learning how to associate a `piece of text and an image`
+
+During the **fine tuning stage**, the model learns to `identify, object and associate them with a particular word or string`
+
+## Lab
+
+Now that we have covered at a high level how the OWL-ViT model works, let's jump into some code and see how we can use it in practice 
 
 Before we start leveraging the two models we will be using in this pipelinegsii Let's start by creating a Comet experiment which will allow us to compare the generated masks that will be produced at the end of this pipeline
 
-We have created here an anonymous experiment, meaning you don't need 
-to create a Comet account to get access to the Comet functionality
+We have created here an anonymous experiment, meaning you don't need to create a Comet account to get access to the Comet functionality
 
 Now that we have initialized Comet ML, we can go ahead and create our first experiment, which will be used to track all of the work within this code walkthrough
 
@@ -62,15 +75,11 @@ For this lesson we will be using the same image as we used in the previous lesso
 
 The images of the two dogs sitting side by side.
 
-
-Let's first load in this image and display it within the notebook
-so we can remind ourselves what it looks like
+Let's first load in this image and display it within the notebook so we can remind ourselves what it looks like
 
 In order to view this image we will be using the image function from the PIL library
 
-Instead of downloading the image directly from the internet
-we will be leveraging Comet artifacts to download all of the images 
-required for this lesson
+Instead of downloading the image directly from the internet we will be leveraging Comet artifacts to download all of the images required for this lesson
 
 As you can see, we now have the same image as we used in the previous notebookLet's go ahead and load the OWL-ViT model from the Hugging Face hub
 
@@ -78,8 +87,7 @@ In order to access the OWL-ViT model we will be using the Transformers library a
 
 There are many different versions of the OWL-ViT model available on Hugging Face
 
-For this particular lesson, you will be using the base model 
-OWL-ViT base
+For this particular lesson, you will be using the base model OWL-ViT base
 
 Now that the model has been loaded we can go ahead and use it to identify the dogs in the image 
 
@@ -105,78 +113,55 @@ and reformat it to make it easier to plot the bounding boxes
 on the image.
 
 
-on the image We can then use the show boxes and labels on image function 
-to view the bounding boxes on top of the image of the two dogs
+on the image We can then use the show boxes and labels on image function to view the bounding boxes on top of the image of the two dogs
 
 As you can see here, and generate two bounding boxes highlighting each dog on the image the OWL-ViT model has been able to take a text input dog 
 
-It was even able to overlap the bounding boxes of the two dogs,  You have now successfully identified the two dogs on the image based on a simple text prompt
+It was even able to overlap the bounding boxes of the two dogs, You have now successfully identified the two dogs on the image based on a simple text prompt
 
-You can now move on to the next step of the pipeline, 
-
-which is to use these bounding boxes to create segmentation masks for each dog
+You can now move on to the next step of the pipeline, which is to use these bounding boxes to create segmentation masks for each dog
 
 The approach we will be taking is very similar to the previous lesson
+
 However, instead of using the fast SAM model, you will be using the mobile SAM model
 
 As you will have seen in the previous lesson, the SAM model or segment anything model can be used to generate masks based on bounding boxes
 
-The SAM model is quite large and requires a lot of computational resourcef in order to generate these masks this lesson, we will be using the MobilesAM model,
+The SAM model is quite large and requires a lot of computational resourcef in order to generate these masks this lesson, we will be using the [MobilesAM model](https://arxiv.org/abs/2306.14289), Which has been optimized to run on devices that might not have access to GPUs.
 
-Which has been optimized to run on devices that might not have access to GPUs.
+### Model Distillation vs Compression (Quantization)
 
-In order to perform more efficiently the MobileSAM model uses a process known as model distilation
+In order to perform more efficiently the MobileSAM model uses a process known as model `distillation`
 
-Model distillation, allows you to take a very large model and transfer its knowledge to a smaller model and this allows you to run the model a lot more efficiently
+> **Model distillation**, allows you to take a very large model and transfer its knowledge to a smaller model and this allows you to run the model a lot more efficiently
 
-Model distillation is a different technique compared to model
-compression techniques or quantization, in the sense that it doesn't actually change the model format, but trains an entirely new and much smaller model change the model format, but trains an entirely new and much smaller model
+> Model Distillation is a different technique compared to model `compression` techniques or `quantization`, in the sense that **it doesn't actually change the model format**, but trains an entirely new and much smaller model
 
-In this lesson, you will see that the MobilesAM model performs juist as as well as the larger SAM model
+In this lesson, you will see that the MobilesAM model performs just as as well as the larger SAM model
 
-You can now load the MobilesAM model using the Uitra Analytics library
+You can now load the MobilesAM model using the Ultra Analytics library
+
 You will now use the SAM model we have just loaded and the bounding box is generated from the OWL-ViT model to generate our first set of segmentation masks for each dog
 
-Similarly to the previous lesson, we wil be defining labels to specify 
-where the bounding box belongs to the object we would like to segment
-or the background
+Similarly to the previous lesson, we wil be defining labels to specify where the bounding box belongs to the object we would like to segment or the background
 
 In our case, all of the bounding boxes belong to the object
 we would like to segment, and before the labels will be specified as one instead of zeros.
 
 
-Given we are implementing a pipeline where the output of the first model
+Given we are implementing a pipeline where the output of the first model is used as an input to the following model, we wil you be using the numpy repeat function to simply generate an array filled with ones where the length of the array is equal to the number of bounding boxes generated by the first model.
 
-is used as an input to the following model, we
+We can then use the raw image, the bounding boxes, and the labels to generate segmentation masks using the MobileSAM model
 
-wil you be using the numpy repeat function to simply generate
+As you can see, we have been able to create segmentation masks in under a second using the highly optimized Mobilesam model.
 
-an array filled with ones where the length of the array
-
-is equal to the number of bounding boxes generated by the first model.
-
-We can then use the
-
-raw image, the bounding boxes, and the labels
-
-to generate segmentation masks using the MobileSAM model
-
-As you can see, we have been able to create segmentation
-
-masks in under a second using the highly optimized Mobilesam model.
-
-The model predict function returns
-
-a result object that contains not just the masks but also the original image and additional metadata 
+The model predict function returns a result object that contains not just the masks but also the original image and additional metadata 
 
 We can then extract the masks from this object using the following code.
 
-The masks are simply a series of false and true booleans, which indicate
+The masks are simply a series of false and true booleans, which indicate whether a particular pixel belongs to the backoround of the image, or belongs to the mask that we have generated.
 
-whether a particular pixel belongs to the backoround of the image, or belongs to the mask that we have generated.
-
-In order to visualize the masks you have just created, we can use 
-the show masks on image uti funotion that we have created for you.
+In order to visualize the masks you have just created, we can use the show masks on image uti funotion that we have created for you.
 
 
 As you can see, the MobileSAM model has been able to create two
@@ -193,9 +178,7 @@ Let's now try a different use case1231 where we would like to blur out people's 
 
 You will start by loading in the image to see which faces you have to blur
 
-As you can see, we have an image here with five different people
-and we will be blurring out each of their faces before using the Owl
-and MobileSAM model to perform the image editing we will first resize the image to be just 600 pixels wide
+As you can see, we have an image here with five different people and we will be blurring out each of their faces before using the Owl and MobileSAM model to perform the image editing we will first resize the image to be just 600 pixels wide
 
 This will allow us to perform the entire pipeline in a more time efficient manne
 
@@ -341,9 +324,13 @@ Let's go on to the next lesson.
 
 Docs: 
 
-- [OWL-ViT](https://huggingface.co/docs/transformers/model_doc/owlvit)
+- [OWL-ViT - HF](https://huggingface.co/docs/transformers/model_doc/owlvit)
 
-
+Papers:
+- [Owl - ViT (Simple Open-Vocabulary Object Detection with Vision Transformers)](https://arxiv.org/pdf/2205.06230)
+- [MOBILE SAM](https://arxiv.org/pdf/2306.14289)
+  - [MobileSAM Model](https://huggingface.co/dhkim2810/MobileSAM)
+- 
 
 
 
