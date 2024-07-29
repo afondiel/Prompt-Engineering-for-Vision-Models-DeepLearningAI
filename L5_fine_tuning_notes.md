@@ -2,47 +2,52 @@
 
 ## Overview
 
-<!-- <img width="920" height="400" src="./docs/screenshots/tuning0.png"> -->
-[Diffusion models](https://huggingface.co/learn/diffusion-course/unit0/1) are powerful tools for image generation but sometimes no amount of prompt engineering or hyperparameter optimization will yield the results you're looking for.
+[Diffusion models](https://huggingface.co/learn/diffusion-course/unit0/1) are powerful tools for image generation but sometimes NO amount of prompt engineering or hyperparameter optimization will yield the results you're looking for.
 
-When prompt engineering isn't enough You may opt for fine-tuning instead
+> When prompt engineering isn't enough, You may opt for fine-tuning instead.
 
 Fine-tuning is extremely resource intensive, but thankfully there's a method of fine-tuning stable ditfusion that uses far fewer resources, called [Dreambooth](https://huggingface.co/docs/diffusers/training/dreambooth)
 
 In this lesson, you'll learn how to fine-tune stable diffusion with just a few images in order to produce your own custom results
 
-Let's jump in
+### Stable Diffusion Fine-Tuning
 
-Previously, you've seen how manipulating your prompts and parameters can allow yqy to control the output of diffusion models
+Previously, you've seen how manipulating your prompts and parameters can allow you to control the output of diffusion models
 
 Now you're going to explore ways of teaching a model to generate images of a subject it's never seer before
 
 For example how might we teach a model to generate an image of Andrew as a Van Gogh painting?
 
+<img width="400" height="400" src="./docs/screenshots/tuning0.png">
+
+(Source: [link](https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/6/fine-tuning))
+
+**Fine-Tuning Techniques**
+
 To achieve this, you're going to learn two new techniques for fine-tuning diffusion models
 
-The first technique is called Dreambooth
+The first technique is called [Dreambooth](https://huggingface.co/docs/diffusers/training/dreambooth)
 
-DreamBooth is designed to teach diffusior models new subjects using very smell amounts of example data object, for instance, we'l only be using six images of Andrew.
-
-The second technique is called [Lora (Low Rank Adaptation)](https://huggingface.co/docs/diffusers/training/lora)
+- DreamBooth is designed to teach diffusior models new subjects using very smell amounts of example data object, for instance, we'l only be using six images of Andrew.
+- The second technique is called [Lora (Low Rank Adaptation)](https://huggingface.co/docs/diffusers/training/lora)
 
 We're going to get into more detail with LoRa later but for now, let's start with Dreambooth
+
+### Fine-tuning Challenges
 
 Before we talk about the mathematics behind DreamBooth first think about why it might be difficult to fine-tune a diffusion model with such a small data set
 
 What problems might this cause?
 
-The first and most obvious issue has to do with the robustness of your data
+1. The first and most obvious issue has to do with the `robustness` of your data
 
-Six headshots of Andrew might be enough for the model to generate a decent headshot, but it's unlikely that the model is going to be able to generate images of Andrew in other contexts
+   - 6 headshots of Andrew might be enough for the model to generate a decent headshot, but it's unlikely that the model is going to be able to generate images of Andrew in other contexts
 
-The second issue has to do with language drift.1:3Z When we fine-tune models, we're always walking this tightrope
-between improving the model's performance on our downstream
-task and damaging the model's performance on our other tasks
+2. The second issue has to do with `language drift`.
 
-In other words, imagine we aggressively tune the model with our six photos
-of Andrew, each pair with a prompt like a photo of a man named Andrew
+   - When we fine-tune models, we're always walking this tightrope between improving the model's performance on our downstream task and damaging the model's performance on our other tasks
+
+In other words, imagine we aggressively tune the model with our six photos of Andrew, each pair with a prompt like a photo of a man named Andrew
 
 It's very likely that the models embedded definitions of photo and man will begin to drift to match the distribution1.59 of our small, narrow date set that wil then damage the qualty of the model
 
@@ -51,14 +56,15 @@ if we use it later to generate anything besides a photo of Andrew.example, it mi
 DreamBooth solves both of these problems, in large part
 by leveraging the diffusion model's existing understanding of the world
 
-The authors of the DreamBooth paper call this "the semantic prior knowledge."
+### DreamBooth Basics**
+
+The authors of the [DreamBooth paper](https://arxiv.org/pdf/2208.12242) call this `the semantic prior knowledg`
 
 You can think of this like using context clues when you're reading a new word
 
 When the model sees a prompt like a photo of a man named Andrew it might not know what Andrew looks like but it knows generally what a photo of a man looks like
 
-It can then leverage this information in training, allowing us to get by with a
-much smaller example dataset
+It can then leverage this information in training, allowing us to get by with a much smaller example dataset
 
 More concretely, this is what DreamBooth looks like in practice
 
@@ -73,18 +79,20 @@ that generally describes the class which your subject belongs to
 
 For example, for Andrew, we might select the token pair brackets for man
 
-We then associate prompts which include timages of Andrews.1i So for exampie, if we nad an image of Anorew playin Li3:dode Digdg associate it with the prompt a photo playing basketball.Dasketpall on our dataset,
+We then associate prompts which include timages of Andrews.
 
-we might associate it with the prompt a photo of a "IV]" man
+So for exampie, if we nad an image of Andrew playin associate it with the prompt a photo playing basketball.Basketpall on our dataset,
+
+we might associate it with the prompt a photo of a "[V]" man
 playing basketball
 
-The model should be able to use its prior understanding
+The model should be able to use its **prior understanding**
 of all the other words in that sentence to guide its generation
 
-So, even if we're not giving the model a super robust dataset
-because it knows generally what a photo of a man playing basketball should look like
+So, even if we're not giving the model a super robust dataset because it knows generally what a photo of a man playing basketball should look like
 
-it can hopefully3733 pick up on the specific differences that differentiate the photo of Andrew
+it can hopefully pick up on the specific differences that differentiate the photo of Andrew
+
 playing basketball from a general photo of a man playing basketbal
 
 After fine-tuning, the model should associate the token
@@ -96,20 +104,25 @@ In fact, based on everything we describe so far, it might seem to you like we're
 
 DreamBooth addresses this problem in a really clever way
 
-The authors of the paper created a custom loss metric, which they call a prior preservation loss,4.ug which impiements an interesting form of reguiarization<148otripzctservation penalizes the model for drifuing too far from its existing understanding of the world
+### Prior Preservation Loss
+
+The authors of the paper created a custom `loss metric`, which they call a **prior preservation loss**, which implements an interesting form of `regularization`
+
+Prior Preservation penalizes the model for drifuing too far from its existing understanding of the world
 
 Generally speaking, it works like this:
 
-You create a data set of images paired with props
+```
+You create a data set of images paired with prompt
 
-In this case you might have six photos of Andrew with captions like "a photo of a IV] man'"
+In this case you might have six photos of Andrew with captions like "a photo of a [V] man'"
 
-In DreamBooth parlance, we cal these the instance images and instance props
+In DreamBooth parlance, we call these the `instance images` and `instance prompt`
+```
 
-In this project, you're going to use a single prompt4134 for every single one of your images,4.36 but you should experiment with writing custom prompts for each image
+In this project, you're going to use a single prompt for every single one of your images, but you should experiment with writing custom prompts for each image
 
-You can even use a model like BLIP to automatidally generate the captions
-for your images which is really useful when you're working with a larger number of images
+You can even use a model like [BLIP](https://huggingface.co/docs/transformers/model_doc/blip) to automatidally generate the captions for your images which is really useful when you're working with a larger number of images
 
 You then select a prompt that is representative of al the concepts you're afraid your model was going to lose during fine-tuning and the DreamBooth literature we call this the class prompt
 
@@ -121,22 +134,27 @@ With these images, you can construct a robust distribution representing the mode
 
 During the training process, you then calculate two losses
 
-First, you calculate the loss against the instance data
+- First, you calculate the loss against the instance data
 
 Basically, how good is the model at reconstructing these images of Andrew when we give it our modified token pair
 
-Second, you calculate the loss for the class data
+- Second, you calculate the loss for the class data
 
-In other words, how close does the model come to generating an image from the prior distribution when prompted with the class prompt?5.33 Because the class distribution is sampled directly from the model before you conduct any fine-tuning, it gives you a concrete basis for measuring how far the model has drifted
+In other words, how close does the model come to generating an image from the prior distribution when prompted with the class prompt?
 
-Basically, if given the same prompt, the model generates a wildly different image before and after fine-tuning we know that there's been some drift.5150 You can then combine these two terms which wel'l cal the instance loss and the class loss to give you a comprehensive loss metric
+Because the class distribution is sampled directly from the model before you conduct any fine-tuning, it gives you a concrete basis for measuring how far the model has drifted
+
+Basically, if given the same prompt, the model generates a wildly different image before and after fine-tuning we know that there's been some drift
+
+> You can then combine these two terms which we'll call the `instance loss` and `the class loss` to give you a comprehensive loss metric
+
+## Lab
 
 Now that we're familiar with DreamBooth from a theoretical perspective
 
-Let's try actually implementing ii
+Let's try actually implementing
 
 Much of the code you'l be using throughoul this section is adapted from Hugging Faces preamBooth training scripts,
-
 
 the model doesn't drift during a training process we can increase this to a higher value
 
@@ -148,18 +166,15 @@ We're not actually going to run it because we're doing it on a CPU can take quit
 
 Instead, we've provided the entire dataset of class images as a Comet artifact that we can just download immediately
 
-As a refresher, a Comet artifact is an asset that's stored in comet
-and version controlled
+As a refresher, a Comet artifact is an asset that's stored in comet and version controlled
 
-The easiest way to generate your class images is to use this DreamBooth trainer or utility class
-we provided
+The easiest way to generate your class images is to use this DreamBooth trainer or utility class we provided
 
 We're going to use this a lot throughout this project
 
-To abstract away some of the boilerplate you'll need to run your training pipelinea.21 Now, if at any time you get curious ahout what's actually going on under the hood with these utility methods,g:25 you can always use the double question
+To abstract away some of the boilerplate you'll need to run your training pipelinea.
 
-
-which you can find link to the bottom of this notebook
+Now, if at any time you get curious ahout what's actually going on under the hood with these utility methods, you can always use the double question which you can find link to the bottom of this notebook
 
 You're encouraged to explore these examples to learn about all the complex optimizations that are available here
 
@@ -240,7 +255,7 @@ The second imbortant thing to notice is that Andrew owns a lot of blue shirts
 
 Now that our data sets are downloaded1111089°/8089move on to initializing our models.
 
-If you recall, a diffusion pipeline consists of a text encoder model a variational autoencoder and a U-Net model that is used for the actual denoising process
+If you recall, a diffusion pipeline consists of a text encoder model a variational autoencoder and a [U-Net model](https://huggingface.co/docs/diffusers/api/loaders/unet) that is used for the actual denoising process
 
 We can initialize all of these along with our tokenizer by using the trainer.initialize models method
 
@@ -258,10 +273,9 @@ the technique we'll be using to actually fine-tune the model
 
 One of the key challenges behind fine-tuning large models is that weight matrices are at the risk of sounding obvious, really large
 
-If your weight matrix is of size MxN, then you may need to compute
-a gradient matrix that's also of size MxN for every single update
+If your weight matrix is of size MxN, then you may need to compute a gradient matrix that's also of size MxN for every single update
 
-With many öptimizers such as Adam with momentum
+With many optimizers such as Adam with momentum
 
 You actually compute multiple such matrices leading to a very large memory footprint
 
@@ -271,7 +285,11 @@ That means that the rank of the matrix, or the number of linearly independent co
 
 Intuitively this tells us that we can probably capture a lot of the important information for updating our weights in smaller matrices
 
-This is essentially what LoRA does.12:2Z Instead of computing a full MxN update matrix to update our weights at every single step of the training process, LoRA instead trains a new set of smaller weights, which we call adapters which are then added to the original weights.12:4] Mathematicaly, this is what LoRA looks like.
+This is essentially what LoRA does.
+
+Instead of computing a full MxN update matrix to update our weights at every single step of the training process, LoRA instead trains a new set of smaller weights, which we call adapters which are then added to the original weights
+
+Mathematicaly, this is what LoRA looks like: 
 
 In a normal training update, the weights at the next timestep look like the weights at the current time step, plus an update matrix where the weights and the update matrix are both matrices of size MxN.
 
@@ -289,7 +307,7 @@ Besides the reduced memory footprint, one of the nice parts of LoRA is that you 
 
 So, for instance, if you later wanted to fine-tune a LoRA adapter for a photo of a different person you could swap them out for your Andrew adapters very easily
 
-In this example, we're only going to be tuning the U-Net model, so it's the only model we need to prepare for [LORA](https://huggingface.co/docs/diffusers/training/lora)
+In this example, we're only going to be tuning the U-Net model, so it's the only model we need to prepare for [LoRA](https://huggingface.co/docs/diffusers/training/lora)
 
 In addition, we also need to initialize our optimizer and extract the parameters
 we're going to be optimizing
@@ -416,9 +434,7 @@ You can also try to tune a larger, stable diffusion model using a GPU environmen
 
 You can even collect the data set yourself or try targeting a different token.
 
-Using the code provided here,
-
-you should be able to take on a diverse array of projects.
+Using the code provided here, you should be able to take on a diverse array of projects.
 
 ## References
 
@@ -427,14 +443,25 @@ Main course:
 
 
 Resources:
-
 - [Awesome-Diffusion-Models: A collection of resources and papers on Diffusion Models](https://github.com/diff-usion/Awesome-Diffusion-Models)
 
-- https://huggingface.co/docs/diffusers/training/dreambooth
-- https://huggingface.co/docs/diffusers/training/lora
 
+Docs: 
 
+- Fine-tuning Techniques:
+  - https://huggingface.co/docs/diffusers/training/dreambooth
+  - https://huggingface.co/docs/diffusers/training/lora
 
+Models
+- [BLIP HF](https://huggingface.co/docs/transformers/model_doc/blip)
+  - Tasks: 
+    - Visual Question Answering
+    - Image-Text retrieval (Image-text matching)
+    - Image Captioning
+- [U-Net HF](https://huggingface.co/docs/diffusers/api/loaders/unet)
+
+Papers: 
+- [DreamBooth Paper](https://arxiv.org/pdf/2208.12242)
 
 
 
