@@ -56,7 +56,7 @@ You can also provide it with `images`, `masks`, and `various hyperparameters` to
 
 You can even direct your model to take an initial image and use diffusion to edit Especific portion of the image via a technique called `Inpainting`
 
-## Lab
+## Lab: Image Editing Pipeline using Diffusion
 
 In this lesson, you're going to learn to do exactly that
 
@@ -68,11 +68,10 @@ They gave you a photo of them leaning over a cat and asked you to replace the ca
 
 You could spend days using Photoshop to edit the image or you could use a diffusion model to do it in minutes.224 To get started we're going to download our masks and images from Comet as artifacts
 
-You've already learned about artifacts previously, but to recap, artifacts are just version controlled assets
+> You've already learned about artifacts previously, but to recap, **artifacts are just version controlled assets**. 
+> They can be anything from models to data sets, or in this case your friend's photo and a segmentation mask of a cat
 
-They can be anything from models to data sets, or in this case your friend's photo and a segmentation mask of a cat
-
-Once our artifact has been downloaded we can extract the images from them and view them using matplotlib
+Once our artifact has been downloaded we can extract the images from them and view them using `matplotlib`
 
 As you can see, we now have an image of our friend leaning over a cat and we have a segmentation mask of the cat
 
@@ -86,23 +85,19 @@ Once our device is set, we can initialize a stable diffusion inpainting pipeline
 
 You should notice that we're using the stable diffusion to inpainting model which is a diffusion model that was trained specifically for these inpainting tasks
 
-We're also using different dimeric formats depending on our hardware situation
-
-This should save some memory
+We're also using different dimeric formats depending on our hardware situation. This should save some memory
 
 Once our pipeline is initialized, we want to start thinking about the parameters we're going to use to generate our image
 
-The mostimportant and maybe most overlooked parameter is the seed
+The most important and maybe most overlooked parameter is the `seed`
 
 We want to set our seed number manually so that our results are reproducible later
 
-In addition, we'l need our prompt
-
-We'll need our image
-
-We'll need our mask image
-
-And we'll need a hyperparameter that we haven't discussed yet
+In addition, we'll need our: 
+- prompt
+- image
+- mask image
+- hyperparameter (that we haven't discussed yet)
 
 In this experiment
 
@@ -128,23 +123,26 @@ We've just changed the inference steps from 3 to 100
 
 As before, we're not going to run this code but we do have another Comet experiment that was run using this exact same code and we can view its outputs right now
 
-Okay
 
 This is looking much better
 
 However, we still have some features that look a fitte oad and I think we could do better
 
-The next thing we might try is tinkering with another hyperparameter called the guidance scale.As: 99%é gtidance scale is a numeric value specifically, we're going to be looking at the number of inference steps
+The next thing we might try is tinkering with another hyperparameter called the `guidance scale`.
 
-With diffusion pipelines you can control how many inference steps the pipeline takes and de-noising the image
+As guidance scale is a numeric value specifically, we're going to be looking at the number of inference steps
 
-When you allow the pipeline to take more infrared steps there's a more gradual denoising process
+```
+With diffusion pipelines you can control how many inference steps the pipeline takes and de-noising the image.
+
+When you allow the pipeline to take more infrared steps there's a more gradual denoising process.
 
 Oftentimes, this can lead to a higher quality image
 
 However, there's a point of diminishing returns where you're simply wasting your compute power
 
 You can also end up with an image that looks a little overly processed where the features are a little too smooth or the colors aren't exactly realistic
+```
 
 Returning to our code, let's say ready to generate some images?
 
@@ -281,6 +279,10 @@ In the next lesson, we're going to go one step further with diffusion models And
 
 ## References
 
-- Main course: 
-  - https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/5/image-generation
+Main course: 
+- https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/5/image-generation
+
+Docs:
+
+- [Inpainting - HF](https://huggingface.co/docs/diffusers/api/pipelines/stable_diffusion/inpaint)
 
