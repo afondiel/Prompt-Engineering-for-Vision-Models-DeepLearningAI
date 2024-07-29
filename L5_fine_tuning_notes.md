@@ -268,8 +268,9 @@ for accessing these kinds of schedulers
 
 Now, we're almost ready to begin training our mode
 
-But first, we need to talk about LoRA
-the technique we'll be using to actually fine-tune the model
+But first, we need to talk about LoRA the technique we'll be using to actually fine-tune the model
+
+<img width="400" height="400" src="./docs/screenshots/tuning1.png">
 
 One of the key challenges behind fine-tuning large models is that weight matrices are at the risk of sounding obvious, really large
 
@@ -290,6 +291,8 @@ This is essentially what LoRA does.
 Instead of computing a full MxN update matrix to update our weights at every single step of the training process, LoRA instead trains a new set of smaller weights, which we call adapters which are then added to the original weights
 
 Mathematicaly, this is what LoRA looks like: 
+
+<img width="400" height="400" src="./docs/screenshots/tuning2.png">
 
 In a normal training update, the weights at the next timestep look like the weights at the current time step, plus an update matrix where the weights and the update matrix are both matrices of size MxN.
 
