@@ -4,7 +4,12 @@
 
 You can prompt `stable diffusion` with text, but also with images and masks.
 
-Additionally, you can tune some hyperparameters such as: **guidance scale**, **strength** and **the number of inference steps** to better control the diffusion process.
+Additionally, you can tune some hyperparameters such as: 
+- **guidance scale**
+- **strength** 
+- **the number of inference steps** 
+
+to better control the diffusion process.
 
 In previous lessons, you've learned how to use computer vision models to extract information from your images in the form of bounding boxes and segmentation masks
 
@@ -115,14 +120,15 @@ we have a frankly terrifying sort of skeletal lizard looking thing
 
 The first thing we might try in this situation, is simply increasing  the inference steps to a much larger number
 
-Let's say 100
-
-If you look, this is the exact same code as before
+Let's say 100, If you look, this is the exact same code as before
 
 We've just changed the inference steps from 3 to 100
 
 As before, we're not going to run this code but we do have another Comet experiment that was run using this exact same code and we can view its outputs right now
 
+### The Guidance Scale
+
+<img width="480" height="480" src="./docs/screenshots/img_gen2.png">
 
 This is looking much better
 
@@ -156,7 +162,7 @@ All to Comet
 
 When we're done, end our experiments and analyze our results
 
-Now we're not going to actually run this code in this environment<5:(0:0bect12 it'll take a while on CPUs. 
+Now we're not going to actually run this code in this environment, it'll take a while on CPUs. 
 
 that determines how closely the model should follow the prompt
 
@@ -212,7 +218,9 @@ is somewhere between 10 and 2
 
 We might do a further experiment trying more guidance scale values between 10 and 2 till we find the perfect number.8.28 For now, let's move on to trying a different hyperparameter
 
-The next hyperparameter we're going to look at is one that is unique to image to image applications 8:3Z of diffusion models.8138 This is caled the `Strength Hyperparameter`
+### Strength
+
+The next hyperparameter we're going to look at is one that is unique to image to image applications of diffusion models.8138 This is caled the `Strength Hyperparameter`
 
 When we use a diffusion model to edit an image, as we're doing in inpainting, we have to add a lot of noise to it to delete the section that we want to replace
 
@@ -268,13 +276,20 @@ And look at that
 
 Refine our dragon to get rid of some of the features we didn't love in the previous generations
 
-While, enhancing the good qualities With everything you've learhed here and everything we've covered in other lessons
+While, enhancing the good qualities With everything you've learned here and everything we've covered in other lessons
 
-You should be able to build a pipeline where you take an image, generate a mask use inpainting that edit it, and do it all in a streamlined fashion sort of like a stable diffusion powered Photoshop
+### Stable Diffusion powered Photoshop
+
+You should be able to build a pipeline where:
+- you take an image, 
+- generate a mask 
+- use inpainting that edit it, 
+
+and do it all in a streamlined fashion sort of like a `stable diffusion powered Photoshop`
 
 That's it for this lesson!
 
-In the next lesson, we're going to go one step further with diffusion models And we're going to learn **how to teach'a diffusion model to cenerate an image of something It's never seen before**
+In the next lesson, we're going to go one step further with diffusion models And we're going to learn **how to teach'a diffusion model to generate an image of something It's never seen before**
 
 
 ## References
