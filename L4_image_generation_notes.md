@@ -1,44 +1,40 @@
 # Lesson4: Image Generation 
 
-
 ## Overview
 
-<!-- <img width="920" height="400" src="./docs/screenshots/img_gen0.png"> -->
+You can prompt `stable diffusion` with text, but also with images and masks.
 
+Additionally, you can tune some hyperparameters such as: **guidance scale**, **strength** and **the number of inference steps** to better control the diffusion process.
 
-You can prompt `stable diffusion` with text, but also with images and masks 
-
-Additionally, you can tune some hyper parameters such as guidance scale, strength and the number of inference steps to better control the diffusion process
-
-Let's generate some images
-
-In previous lessons, you've learned how to use computer 0.17 vision models to extract information from your images in the form of bounding boxes and segmentation masks
+In previous lessons, you've learned how to use computer vision models to extract information from your images in the form of bounding boxes and segmentation masks
 
 And these next lessons, you're going to learn how to use computer vision models to add information to your images using diffusion models
 
-Before we dive in, let's first review a little bit about how diffusion models work under the hood
+## Basics of Diffusion
 
-If you're interested in going deeper
+Before we dive in, let's first review a little bit about how `diffusion models` work under the hood
 
-I recommend going through [Deeplearning Al's introduction to Diffusion Models](https://www.deeplearning.ai/short-courses/how-diffusion-models-work/) course
+If you're interested in going deeper, I recommend going through [Deeplearning Al's introduction to Diffusion Models](https://www.deeplearning.ai/short-courses/how-diffusion-models-work/) course
 
-Note that this cour se is not going to get into the mathematics diffusion models
+Note that this course is not going to get into the mathematics diffusion models
 
 We're aiming to give a high level overview of how they work so that you can do these exercises productively 
 
+<img width="480" height="480" src="./docs/screenshots/img_gen0.png">
+
 Diffusion models, like the one you'll be using in this lesson, are really incredible
 
-
-They're capable of generating images? do this via a proces which at a super hiah lebelievably detailed images from
-
+They're capable of generating images unbelievably detailed images from text prompts.
 
 And they do this via a process called diffusion which at a super high level, works like this
 
-The model generates an image of pure gaussian noise
+**How it works?**
+ 
+- The model generates an image of pure `gaussian noise`
 
-Then the model denoise is the image gradually one step at a time
+- Then the model denoise is the image gradually `one step at a time`
 
-Eventually the model removes enough noise to leave us with an attractive image
+- Eventually the model removes enough noise to leave us with an attractive image
 
 In a way, we're kind of lying to the model
 
@@ -50,14 +46,17 @@ Mathematicaly, the model is transforming a sample from a simple distribution lik
 
 Our text prompt shifts our target distribution guiding the model towards chiseling out an image that satisfies the prompt
 
-The model that does the actual denoising is alU-Net model and we use a text encoder to generate the prompt embeddings for guiaing our generation
+> The model that does the actual denoising is a `U-Net model` and we use a text encoder to generate the prompt embeddings for guiding our generation
+
+<img width="480" height="480" src="./docs/screenshots/img_gen1.png">
 
 The model you'll be using, however, can take more than just text as a prompt
 
-You can also provide it with images, masks, and various hyperparameters to better control the dittusion process
+You can also provide it with `images`, `masks`, and `various hyperparameters` to better control the dittusion process
 
-You can even direct your model to take an ihitial image and use diffusion to edit Especific portion of the image via a technique called
+You can even direct your model to take an initial image and use diffusion to edit Especific portion of the image via a technique called `Inpainting`
 
+## Lab
 
 In this lesson, you're going to learn to do exactly that
 
@@ -77,10 +76,10 @@ Once our artifact has been downloaded we can extract the images from them and vi
 
 As you can see, we now have an image of our friend leaning over a cat and we have a segmentation mask of the cat
 
-
 This is all we need to get started with our diffusion editing process
 
 Before we initialize our model, we want to import Torch and we want to set our device correctly
+
 If we have access to GPUs, we want to use those but if not we can use CPUs for this
 
 Once our device is set, we can initialize a stable diffusion inpainting pipeline from the diffusers library
@@ -283,5 +282,5 @@ In the next lesson, we're going to go one step further with diffusion models And
 ## References
 
 - Main course: 
-  - https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/3/image-generation
+  - https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/5/image-generation
 
