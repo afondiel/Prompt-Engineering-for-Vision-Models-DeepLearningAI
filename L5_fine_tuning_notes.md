@@ -251,9 +251,9 @@ This isn't a dataset that we did a lot of preprocessing on
 
 This illustrates that with DreamBooth, you can tune a model really effectively using data thatis readily available to you
 
-The second imbortant thing to notice is that Andrew owns a lot of blue shirts
+The second important thing to notice is that Andrew owns a lot of blue shirts
 
-Now that our data sets are downloaded1111089°/8089move on to initializing our models.
+Now that our data sets are downloaded, let's move on to initializing our models.
 
 If you recall, a diffusion pipeline consists of a text encoder model a variational autoencoder and a [U-Net model](https://huggingface.co/docs/diffusers/api/loaders/unet) that is used for the actual denoising process
 
@@ -261,12 +261,13 @@ We can initialize all of these along with our tokenizer by using the trainer.ini
 
 Adding random noise to our images at different time steps is an essential part of the diffusion process
 
-Because of this, we're going to need a noise scheduler to generate our noise
+Because of this, we're going to need a `noise scheduler` to generate our noise
 
-[Hugging Face's diffusers library](https://huggingface.co/docs/diffusers/index) provides a lot of really nice abstractions
-for accessing these kinds of schedulers
+[Hugging Face's diffusers library](https://huggingface.co/docs/diffusers/index) provides a lot of really nice abstractions for accessing these kinds of schedulers
 
-Now, we're almost ready to begin training our mode
+Now, we're almost ready to begin training our model
+
+### LoRA
 
 But first, we need to talk about LoRA the technique we'll be using to actually fine-tune the model
 
@@ -465,6 +466,7 @@ Models
 
 Papers: 
 - [DreamBooth Paper](https://arxiv.org/pdf/2208.12242)
+- [LoRA: Low-Rank Adaptation of Large Language Models](https://arxiv.org/pdf/2106.09685)
 
 
 
