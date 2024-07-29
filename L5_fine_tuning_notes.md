@@ -56,9 +56,9 @@ if we use it later to generate anything besides a photo of Andrew.example, it mi
 DreamBooth solves both of these problems, in large part
 by leveraging the diffusion model's existing understanding of the world
 
-### DreamBooth Basics**
+### DreamBooth Basics
 
-The authors of the [DreamBooth paper](https://arxiv.org/pdf/2208.12242) call this `the semantic prior knowledg`
+The authors of the [DreamBooth paper](https://arxiv.org/pdf/2208.12242) call this `the semantic prior knowledge`
 
 You can think of this like using context clues when you're reading a new word
 
