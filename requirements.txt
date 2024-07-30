@@ -1,7 +1,7 @@
 # requirements file
 # note which revision of python, for example 3.9.6
 # in this file, insert all the pip install needs, include revision
-transformers==4.38.0
+transformers>=4.37.2
 torch==2.2.0
 comet-ml==3.37.2
 einops==0.7.0
