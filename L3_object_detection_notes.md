@@ -2,7 +2,6 @@
 
 ## Overview
 
-
 In this lesson, you'll use natural language to prompt a `zero-shot` object detection model [Owl-ViT](https://huggingface.co/docs/transformers/model_doc/owlvit), where, [ViT](https://huggingface.co/docs/transformers/model_doc/vit) stands for vision Transformer.
 
 You'll then use the output of this model as an input to [SAM](https://segment-anything.com/), which you used in the [last lesson](./L2_image_segmentation_notes.md).
@@ -14,6 +13,7 @@ You'll create an `image editing pipeline` by chaining these two vision models (O
 In the last lesson, we saw how to create `masks` based on `point prompts` or `bounding boxes`.
 
 In this lesson, we're going to see how we can use `natural text` to generate these `masks` instead
+
 ```mermaid
 flowchart LR
   subgraph Pipeline
@@ -36,6 +36,8 @@ In order to do this, we're going to be using a `pipeline of models` which means 
 The zero-shot object detection model we will be using is called `OWL-ViT`.
 
 <img width="600" height="600" src="./docs/screenshots/obj_det0.png">
+
+(Source [Link](https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/4/object-detection))
 
 OWL-ViT model is a zero sharp object detection model, meaning, it can `detect objects` within an image based on simple `text prompts `
 
@@ -61,11 +63,14 @@ While in the **pre-training phase**, the model was just learning how to associat
 
 During the **fine tuning stage**, the model learns to `identify, object and associate them with a particular word or string`
 
-## Lab
+## Lab: Hands-On Notebook 👉 [![Open notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/afondiel/Prompt-Engineering-for-Vision-Models-DeepLearningAI/blob/main/lab/notebooks/L3_Object_Detection.ipynb)
+
 
 Now that we have covered at a high level how the OWL-ViT model works, let's jump into some code and see how we can use it in practice 
 
-Before we start leveraging the two models we will be using in this pipelinegsii Let's start by creating a Comet experiment which will allow us to compare the generated masks that will be produced at the end of this pipeline
+Before we start leveraging the two models we will be using in this pipeline
+
+Let's start by creating a Comet experiment which will allow us to compare the generated masks that will be produced at the end of this pipeline
 
 We have created here an anonymous experiment, meaning you don't need to create a Comet account to get access to the Comet functionality
 
@@ -126,6 +131,8 @@ The approach we will be taking is very similar to the previous lesson
 ### MobileSAM
 
 <img width="600" height="600" src="./docs/screenshots/obj_det1.png">
+
+(Source [Link](https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/4/object-detection))
 
 However, instead of using the fast SAM model, you will be using the mobile SAM model
 
@@ -315,7 +322,6 @@ Even better you could provide the faces of the people in this photo
 
 In this lesson, you will have created your first pipeline using the output of one model, the OWL, to serve as an input for the second model, in this case MobileSAM
 
-
 In the next lesson, you will be looking at how to use `Stable diffusion` to perform `inpainting`
 
 Let's go on to the next lesson.
@@ -323,8 +329,8 @@ Let's go on to the next lesson.
 
 ## References
 
-- Main course: 
-  - https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/4/object-detection
+Main course: 
+- https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/4/object-detection
 
 Docs: 
 
