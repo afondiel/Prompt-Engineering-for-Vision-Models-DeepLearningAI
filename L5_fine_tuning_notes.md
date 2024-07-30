@@ -148,7 +148,7 @@ Basically, if given the same prompt, the model generates a wildly different imag
 
 > You can then combine these two terms which we'll call the `instance loss` and `the class loss` to give you a comprehensive loss metric
 
-## Lab
+## Lab: Hands-On Notebook 👉 [![Open notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/afondiel/Prompt-Engineering-for-Vision-Models-DeepLearningAI/blob/main/lab/notebooks/L5_Fine_Tuning.ipynb) 
 
 Now that we're familiar with DreamBooth from a theoretical perspective
 
