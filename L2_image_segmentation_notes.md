@@ -12,9 +12,11 @@ Let's take a look at a few different methods of visually prompting the Segment A
 
 ## What is image segmentation?
 
-> Image segmentation is a computer vision technique that partitions a digital image into discrete groups of pixels or image segments.
+> **Image Segmentation** is a computer vision technique that partitions a digital image into discrete groups of pixels or image segments.
 
 <img width="520" height="480" src="./docs/screenshots/img_seg0.png">
+
+(Source [Link](https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/3/image-segmentation))
 
 `Image segmentation` is typically used to locate objects and boundaries in images, and is commonly used in object detection, 3D reconstruction, and image editing workflows.
 
@@ -23,17 +25,21 @@ s of assigning a label to every pixel in an image such that pixels with the same
 
 <img width="800" height="400" src="./docs/screenshots/img_seg1.png">
 
-Let's take a look at a few different methods of visually prompting the Segment Anything Model (SAM): 
-- the Segment Anything Model (SAM) 
-- faster version of the Segment Anything Model (FastSAM) 
+(Source [Link](https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/3/image-segmentation))
+
+## SAM vs FastSAM
+
+Let's take a look at a few different methods of visually prompting the Segment Anything Model (SAM) or FastSAM, a faster version of the Segment Anything Model:
 - prompting with a set of pixel coordinates
 - prompting with multiple sets of coordinates
 - prompting with bounding boxes
 - using a positive and negative prompts
 
-The original Segment Anything Model is a milestone in computer vision that has become a foundational step for many high-level downstream tasks like image segmentation, image captioning, and image editing. 
+The original Segment Anything Model (SAM) is a milestone in computer vision that has become a foundational step for many high-level downstream tasks like **image segmentation, image captioning, and image editing**. 
 
 <img width="540" height="540" src="./docs/screenshots/img_seg2.png">
+
+(Source [Link](https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/3/image-segmentation))
 
 But its `high computational costs` sometimes prevent it from wider applications in industry scenarios like those in `edge devices`.
 
@@ -48,13 +54,38 @@ Each of these inputs is encoded by an `image encoder` and a `prompt encoder`, re
 
 They are then fed into the `masked decoder`, and SAM outputs the `top three valid masks` for that point or bounding box.
 
-Fast SAM is a `CNN-based` Segment Anything Model trained using only `2% of the original dataset (i.e: 220k images from 11 million images)` published by the SAM authors and achieves comparable performance on `32x32 images`, but at `50x higher the runtime speed`.
+**FastSAM**
 
 <img width="540" height="540" src="./docs/screenshots/img_seg3.png">
 
-> Prompting Fast SAM also differs slightly from prompting the original SAM, in that it automatically **detects all masks** in an image above a configurable confidence threshold, and then filters all the generated masks based on the prompts provided by the user.
+(Source [Link](https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/3/image-segmentation))
 
-## Lab: script along with the notebook 👉 [![Open notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/afondiel/Prompt-Engineering-for-Vision-Models-DeepLearningAI/blob/main/lab/notebooks/L2_Image_Segmentation.ipynb)
+FastSAM is a `CNN-based` Segment Anything Model trained using only `2% of the original dataset` (i.e: 220k images from 11 million images) published by the SAM authors and achieves comparable performance on `32x32 images`, but at `50x higher the runtime speed`.
+
+<img width="540" height="540" src="./docs/screenshots/fastSAM.png">
+
+(Source [Link](https://arxiv.org/pdf/2306.12156))
+
+**FastSAM Framework**
+
+```
+FastSAM contains two stages: 
+
+1. All-instance Segmentation (AIS)
+
+- We use YOLOv8-seg [16] to segment all objects or regions in an image. 
+
+2. Prompt-guided Selection (PGS).
+
+- Then we use various prompts to identify the specific object(s) of interest.
+- It mainly involves the utilization of point prompts, box prompts, and text prompt. The text prompt is based on CLIP[31]
+```
+(From the Original paper: [Link](https://arxiv.org/pdf/2306.12156))
+
+
+> **Prompting FastSAM also differs slightly from prompting the original SAM, in that it automatically `detects all masks` in an image above a configurable confidence threshold, and then filters all the generated masks based on the prompts provided by the user: `points, boxes, text`.**
+
+## Lab: Hands-On Notebook 👉 [![Open notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/afondiel/Prompt-Engineering-for-Vision-Models-DeepLearningAI/blob/main/lab/notebooks/L2_Image_Segmentation.ipynb)
 
 We've already installed the necessary package into this environment, but if you're following along in your own environment, you'll need to pip install a few packages here.
 
