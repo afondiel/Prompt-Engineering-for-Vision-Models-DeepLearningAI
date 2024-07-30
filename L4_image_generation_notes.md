@@ -61,7 +61,7 @@ You can also provide it with `images`, `masks`, and `various hyperparameters` to
 
 You can even direct your model to take an initial image and use diffusion to edit Especific portion of the image via a technique called `Inpainting`
 
-## Lab: Hands-On Notebook 👉 [![Open notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/afondiel/Prompt-Engineering-for-Vision-Models-DeepLearningAI/blob/main/lab/notebooks/L4_Image_Generation.ipynb) 
+## Lab: Hands-On Notebook 👉 [![Open notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/afondiel/Prompt-Engineering-for-Vision-Models-DeepLearningAI/blob/main/lab/notebooks/L4/L4_Image_Generation.ipynb) 
 
 ### Image Editing Pipeline using Diffusion
 
