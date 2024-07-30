@@ -85,7 +85,7 @@ FastSAM contains two stages:
 
 > **Prompting FastSAM also differs slightly from prompting the original SAM, in that it automatically `detects all masks` in an image above a configurable confidence threshold, and then filters all the generated masks based on the prompts provided by the user: `points, boxes, text`.**
 
-## Lab: Hands-On Notebook 👉 [![Open notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/afondiel/Prompt-Engineering-for-Vision-Models-DeepLearningAI/blob/main/lab/notebooks/L2_Image_Segmentation.ipynb)
+## Lab: Hands-On Notebook 👉 [![Open notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/afondiel/Prompt-Engineering-for-Vision-Models-DeepLearningAI/blob/main/lab/notebooks/L2/L2_Image_Segmentation.ipynb)
 
 We've already installed the necessary package into this environment, but if you're following along in your own environment, you'll need to pip install a few packages here.
 
