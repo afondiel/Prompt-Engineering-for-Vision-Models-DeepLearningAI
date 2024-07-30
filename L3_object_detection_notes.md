@@ -63,7 +63,7 @@ While in the **pre-training phase**, the model was just learning how to associat
 
 During the **fine tuning stage**, the model learns to `identify, object and associate them with a particular word or string`
 
-## Lab: Hands-On Notebook 👉 [![Open notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/afondiel/Prompt-Engineering-for-Vision-Models-DeepLearningAI/blob/main/lab/notebooks/L3_Object_Detection.ipynb)
+## Lab: Hands-On Notebook 👉 [![Open notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/afondiel/Prompt-Engineering-for-Vision-Models-DeepLearningAI/blob/main/lab/notebooks/L3/L3_Object_Detection.ipynb)
 
 
 Now that we have covered at a high level how the OWL-ViT model works, let's jump into some code and see how we can use it in practice 
