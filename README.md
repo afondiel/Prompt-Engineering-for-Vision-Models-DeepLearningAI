@@ -2,6 +2,8 @@
 
 <img width="600" height="380" src="https://raw.githubusercontent.com/facebookresearch/segment-anything/main/assets/masks2.jpg">
 
+(Source: [SAM](https://github.com/facebookresearch/segment-anything))
+
 ## Overview
 
 These notes and resources are compiled from the crash course [Prompt Engineering for Vision Models](https://learn.deeplearning.ai/courses/prompt-engineering-for-vision-models/lesson/1/introduction) like [Meta's SAM (Segment Anything Model)](https://segment-anything.com/) or [Stable Diffusion](https://huggingface.co/stabilityai/stable-diffusion-3-medium), offered by [DeepLearning.AI](https://www.deeplearning.ai/).
