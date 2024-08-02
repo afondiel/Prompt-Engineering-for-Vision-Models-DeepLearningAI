@@ -185,7 +185,7 @@ You'll also be using Comet to log your training metrics throughout this exercise
 Comet automatically integrates with many of the libraries
 you'll be using throughout this project
 
-So, it's really important$:27 that we import and initialize Comet before we import any other libraries
+So, it's really important that we import and initialize Comet before we import any other libraries
 
 Most of our focus throughout this project is going to be on the hyperparameters and how we can tune them to control the outputs of our diffusion model
 
@@ -335,11 +335,13 @@ Now for the training loop itself
 
 First, we want to set up the progress bar for tracking our training
 
-The diffusion process has a few steps.14:5Z First, we want to convert our image into its latent representation
+The diffusion process has a few steps.
+
+First, we want to convert our image into its latent representation
 
 To do this, we pass the pixel representation of our image into our variational auto encoder
 
-Then, we sample from the latent distribution.15:0g Once we've converted our image into its latent representation we then need to sample the noise that we're going to add to the latents
+Then, we sample from the latent distribution. Once we've converted our image into its latent representation we then need to sample the noise that we're going to add to the latents
 as we train
 
 Finally, to complete the forward diffusion process we need to add our noise to random timesteps
@@ -348,12 +350,11 @@ Now that the forward diffusion process is done, we need to perform reverse diffu
 
 To do this, we need to get the embeddings of our prompt and use the U-Net model to predict the noise in the image
 
-Once we have our prediction we can calculate our prior ioss and our instande loss15:4g and add them with the prior loss weight to calculate the prior preservation loss
+Once we have our prediction we can calculate our prior ioss and our instande loss and add them with the prior loss weight to calculate the prior preservation loss
 
 Once our loss have been calculated, we can perform backpropagation and step our optimizer as you would in any other training loop.<115000Nc the end of each epoch, we want to log our loss metrics to Comet. 
 
-At the end of our training we want to save our LoRA weights, log our parameters to Comet
-and add a little tag so that we remember that this was a DreamBooth training project
+At the end of our training we want to save our LoRA weights, log our parameters to Comet and add a little tag so that we remember that this was a DreamBooth training project
 
 Then, we can call end training on our accelerator and we're done
 
@@ -373,7 +374,7 @@ and visually inspecting your model's output
 This project really drives this point home because if we look at these loss metrics
 you'll notice some really interesting data
 
-First, you can see that the loss seems to overcorrect back<川17: 1h between the prior loss and the instance loss.
+First, you can see that the loss seems to overcorrect back between the prior loss and the instance loss.
 
 The peaks in the prior loss tend to correspond to valleys in the instance loss, and vice versa
 
@@ -381,7 +382,7 @@ This kind of seesaw effect might make you think that the prior preservation loss
 
 However, if we look at the outputs of the model, well see a very different story
 
-To illustrate this we're going to use our model to generate a bunch of different images of Andrew17.:34 and a bunch of images that dont inciude Andrew
+To illustrate this we're going to use our model to generate a bunch of different images of Andrew and a bunch of images that dont inciude Andrew
 
 To start, let's set up some prompts and some validation prompts
 
@@ -423,10 +424,10 @@ Similarly, this image of a "[V] man' blaying basketball looks ia lot like Andrew
 
 
 Whereas this image of a man playing basketball doesn't look like Andrew at all.
-19:2Z Even though the loss curves wouldn't tell us that our model had improved by looking at the outputs, we can see that it cleanly is learning.
-<11
 
-T/20k03 for us is that we visually inspect the outputs of our model, no matter what the loss curve is saying.
+Even though the loss curves wouldn't tell us that our model had improved by looking at the outputs, we can see that it cleanly is learning.
+
+<11T/20k03 for us is that we visually inspect the outputs of our model, no matter what the loss curve is saying.
 
 Oftentimes, we'll be surprised by the results.
 
