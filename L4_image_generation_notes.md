@@ -183,15 +183,13 @@ However, there's not a lot of matrixy things here
 
 When the guidance scale set higher, in this case twice as high we get an image of a cat who has some matrix sunglasses going on but the image of the cat itself is not very good
 
-0ne thing to note about the guidance scale, ie that the default is going to be different for each diffusion model
+One thing to note about the guidance scale, ie that the default is going to be different for each diffusion model
 
 There's not a standard across the field
 
-So for Stable Diffusion 1.5 which is a smaller model you might use on cpus
+So for Stable Diffusion 1.5 which is a smaller model you might use on cpus `7.5 `is the default value
 
-7.5 is the default value
-
-For other models it's five 100/ 1th2 models it's one.
+For other models it's 5 for others models it's 1.
 
 For other models it's one And you really just need to check the model specifications to know what's right
 
@@ -211,12 +209,16 @@ By calling display on our experiment and passing in the tab equals images argume
 
 We're actually able to see the images dashboard of the real Comet application
 
-As you can see here you can see all the image metadata.8:0Z And here, we can see our different outputs
+As you can see here you can see all the image metadata. 
 
-These two images seem to be our best. i Che3t t2e a guidance scale of ten and at 20
+And here, we can see our different outputs
+
+These two images seem to be our best 
+
+this is a guidance scale of 10 and at 20
 
 So we know that our best output seem to occur when the guidance scale
-is somewhere between 10 and 2
+is somewhere between 10 and 20
 
 We might do a further experiment trying more guidance scale values between 10 and 2 till we find the perfect number.8.28 For now, let's move on to trying a different hyperparameter
 
@@ -232,36 +234,32 @@ If we add a little noise, the image will look very similar the way it looked ori
 
 Strength is what determhines how much noise gets added
 
-Let's run an experiment, with strength similar to our guidance scale experiment
-where we iterate across a number of possible values.ug: 0r00s /y41 1an see here, the code is largely the same 
+Let's run an experiment, with strength similar to our guidance scale experiment where we iterate across a number of possible values. And you can see here, the code is largely the same 
 
 
 As you can see here, the code is largely the same
 
 We're creating a set of possible values for strength
 
-We're iterating across them or passing them all into our stable diffusion
-pipeline
+We're iterating across them or passing them all into our stable diffusion pipeline
 
-For each of our outputs, we log the image and the metadata to Comet
-so that we can analyze it later
+For each of our outputs, we log the image and the metadata to Comet so that we can analyze it later
 
 As before, we're not going to run this experiment here, and we're instead going to view the results of this code via Comet experiment
 
 As we can see when strength is very low, the cat has hardly changed at all
 
-As strength increases more and more of the cat is removed
-and unfortunately, changing the strength doesn't seem to have led to a better image for us
+As strength increases more and more of the cat is removed and unfortunately, changing the strength doesn't seem to have led to a better image for us
 
-That's okay. That's part of the fermentation process
+That's okay. That's part of the `experimentation process`
 
-The final input we want to explore adding to our stable diffusion pipeline is the
+The final input we want to explore adding to our stable diffusion pipeline is the `The negative prompt`. 
 
-The negative prompt should be very intuiti
+The negative prompt should be very intuitive
 
-It's simply a prompt that tells the model what you wart the image to not look like
+> It's simply a prompt that tells the model what you want the image to not look like
 
-So, because we used a realistic green dragon asAu10d:oove migät give it a negative prompt like cartoon
+So, because we used a realistic green dragon as our prompt we might give it a negative prompt like cartoon 
 
 This should reinforce the realism of our output
 
