@@ -119,7 +119,7 @@ Diffusion Models Resources:
 
 - Docs, notes: 
   - [Diffusion Models Notes - @afondiel](https://github.com/afondiel/computer-science-notes/blob/master/ai/generative-ai-notes/Diffusion-notes/diffusion-models-notes.md)
-  - [Vision Large Models (VLMs) Notes - @afondiel](https://github.com/afondiel/computer-science-notes/tree/master/computer-vision-notes/vision-large-models-VLMs)
+  - [Large Vision Models (LVMs) Notes - @afondiel](https://github.com/afondiel/computer-science-notes/tree/master/computer-vision-notes/vision-models/large-vision-models-LVMs)
 
 - HF Diffusion models tools: 
   - [Diffusion Course - HF learn](https://huggingface.co/learn/diffusion-course/unit0/1)
